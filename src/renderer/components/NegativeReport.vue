@@ -2,7 +2,7 @@
   <div id="report" class="content">
     <div class="main_top">
       <el-date-picker v-model="start_time" type="date" placeholder="选择日期"></el-date-picker>
--
+      <span class="splitter">-</span>
       <el-date-picker v-model="end_time" type="date" placeholder="选择日期"></el-date-picker>
 
       <el-button type="primary" @click="searchData()">搜索</el-button>
@@ -55,7 +55,7 @@
 
 <script>
 import tools from "../model/tools.js";
-
+import * as StringUtils from "../utils/stringUtils";
 export default {
   name: "report",
   data() {
@@ -73,18 +73,17 @@ export default {
   filters: {
     formTime(value) {
       let date = new Date(value * 1000); //13位的时间戳
-
       let y = date.getFullYear();
       let MM = date.getMonth() + 1;
-      MM = MM < 10 ? "0" + MM : MM;
+      MM = StringUtils.addZero(MM);
       let d = date.getDate();
-      d = d < 10 ? "0" + d : d;
+      d = StringUtils.addZero(d);
       let h = date.getHours();
-      h = h < 10 ? "0" + h : h;
+      h = StringUtils.addZero(h);
       let m = date.getMinutes();
-      m = m < 10 ? "0" + m : m;
+      m = StringUtils.addZero(m);
       let s = date.getSeconds();
-      s = s < 10 ? "0" + s : s;
+      s = StringUtils.addZero(s);
       return y + "-" + MM + "-" + d + " " + h + ":" + m + ":" + s;
     }
   },
@@ -127,7 +126,7 @@ export default {
         uid: userinfo.id,
         salt: userinfo.salt
       });
-      
+
       let api = `${tools.config.apiUrl}index.php?m=Api&a=logList`;
 
       //格式化日期
@@ -151,13 +150,11 @@ export default {
         })
         .then(response => {
           console.log(response);
-
           this.list = response.data.result;
-
           this.total = response.data.totalPage * 10;
         })
         .catch(error => {
-          this.$message({
+          this.$openMessage({
             message: error,
             type: "warning"
           });
@@ -175,4 +172,7 @@ export default {
 </script>
 
 <style lang="scss">
+.splitter {
+  margin: 0 10px;
+}
 </style>

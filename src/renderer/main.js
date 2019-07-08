@@ -10,6 +10,10 @@ import 'element-ui/lib/theme-chalk/index.css';
 import VueHighcharts from 'vue-highcharts';
 import VueSocketIO from 'vue-socket.io'
 
+import {
+  openMessage
+} from "./utils/message";
+
 Vue.use(ElementUI);
 Vue.use(VueHighcharts);
 
@@ -18,20 +22,23 @@ Vue.use(new VueSocketIO({
   debug: true,
   connection: 'http://118.123.14.36:3000',
   vuex: {
-      store,
-      actionPrefix: 'SOCKET_',
-      mutationPrefix: 'SOCKET_'
+    store,
+    actionPrefix: 'SOCKET_',
+    mutationPrefix: 'SOCKET_'
   }
 }))
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.http = Vue.prototype.$http = axios
+Vue.prototype.$openMessage = openMessage
 Vue.config.productionTip = false
 
 
 /* eslint-disable no-new */
 new Vue({
-  components: { App },
+  components: {
+    App
+  },
   router,
   store,
   template: '<App/>'

@@ -2,43 +2,44 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 Vue.use(Router)
+const requireComponent = file => require(`@/components/${file}`).default
 
 export default new Router({
   routes: [
     {
       path: '/home',
       name: 'home',
-      component: require('@/components/Home').default
+      component: requireComponent("Home") 
     },
     {
       path: '/report',
       name: 'report',
-      component: require('@/components/Report').default
+      component: requireComponent("Report") 
     },
     {
       path: '/negativereport',
       name: 'negativereport',
-      component: require('@/components/NegativeReport').default
+      component: requireComponent("NegativeReport") 
     },
     {
       path: '/positivereport',
       name: 'positivereport',
-      component: require('@/components/PositiveReport').default
+      component: requireComponent("PositiveReport") 
     },
     {
       path: '/keyword',
       name: 'keyword',
-      component: require('@/components/KeyWord').default
+      component: requireComponent("KeyWord") 
     },
     {
       path: '/alarm',
       name: 'alarm',
-      component: require('@/components/Alarm').default
+      component: requireComponent("Alarm") 
     },
     {
       path: '/msg',
       name: 'msg',
-      component: require('@/components/Msg').default
+      component: requireComponent("Msg") 
     },
     {
       path: '*',

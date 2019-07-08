@@ -182,7 +182,7 @@ export default {
           });
         })
         .catch(error => {
-          this.$message({
+          this.$openMessage({
             message: error,
             type: "warning"
           });
@@ -217,7 +217,7 @@ export default {
           }
         })
         .catch(error => {
-          this.$message({
+          this.$openMessage({
             message: error,
             type: "warning"
           });
@@ -225,9 +225,7 @@ export default {
     },
     doLogin() {
       //获取用户名密码
-
-      // console.log(this.userinfo.username);
-
+      //console.log(this.userinfo.username);
       //请求api接口实现登录
 
       // 实际地址：http://www.apiying.com/yuqing/index.php?m=Api&a=log
@@ -240,9 +238,7 @@ export default {
           })
           .then(response => {
             // console.log(response);
-
             response = response.data;
-
             if (response.success) {
               //保存用户信息
 
@@ -252,20 +248,20 @@ export default {
               this.getAreaSeries();
               this.getColumnSeries();
             } else {
-              this.$message({
+              this.$openMessage({
                 message: response.message,
                 type: "warning"
               });
             }
           })
           .catch(error => {
-            this.$message({
-              message: error.message || error,
-              type: error
+            this.$openMessage({
+              message: response.message,
+              type: "warning"
             });
           });
       } else {
-        this.$message({
+        this.$openMessage({
           message: "用户名密码不能为空",
           type: "warning"
         });

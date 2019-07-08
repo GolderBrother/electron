@@ -1,12 +1,13 @@
+import * as CounterTypes from "../types/Counter";
 const state = {
   main: 0
 }
 
 const mutations = {
-  DECREMENT_MAIN_COUNTER (state) {
+  [CounterTypes.DECREMENT_MAIN_COUNTER] (state) {
     state.main--
   },
-  INCREMENT_MAIN_COUNTER (state) {
+  [CounterTypes.INCREMENT_MAIN_COUNTER] (state) {
     state.main++
   }
 }
@@ -14,7 +15,7 @@ const mutations = {
 const actions = {
   someAsyncTask ({ commit }) {
     // do something async
-    commit('INCREMENT_MAIN_COUNTER')
+    commit(CounterTypes.DECREMENT_MAIN_COUNTER)
   }
 }
 

@@ -100,7 +100,6 @@ export default {
     });
 
     //监听右键菜单
-
     window.addEventListener("contextmenu", e => {
       e.preventDefault();
       //给主进程广播事件   注意this指向

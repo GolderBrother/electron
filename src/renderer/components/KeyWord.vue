@@ -91,7 +91,6 @@ import tools from "../model/tools.js";
 
 export default {
   name: "keywords",
-
   data() {
     return {
       dialogFormVisible: false,
@@ -101,11 +100,11 @@ export default {
       list: []
     };
   },
-
   methods: {
     closeModal() {
       this.dialogFormVisible = false;
     },
+    // 增加关键词
     doAddKeywords() {
       // console.log(this.form.keyword);
 
@@ -133,27 +132,26 @@ export default {
 
           if (response.data.success) {
             this.dialogFormVisible = false;
-
             //增加完成重新获取数据
             this.getKeywordsList();
           } else {
-            this.$message({
+            this.$openMessage({
               message: response.data.message,
               type: "warning"
             });
           }
         })
         .catch(error => {
-          this.$message({
+          this.$openMessage({
             message: error,
             type: "warning"
           });
         });
     },
 
+    // 获取关键词列表数据
     getKeywordsList() {
       let userinfo = tools.storage.get("userinfo");
-
       let sign = tools.sign({
         a: "keywordsList",
         uid: userinfo.id,
@@ -164,16 +162,17 @@ export default {
         .get(api)
         .then(response => {
           // console.log(response);
-
           this.list = response.data.result;
         })
         .catch(error => {
-          this.$message({
+          this.$openMessage({
             message: error,
             type: "warning"
           });
         });
     },
+
+    // 编辑关键词
     editKeywords(id) {
       // alert(id);
 
@@ -196,7 +195,7 @@ export default {
           this.editForm = response.data.result;
         })
         .catch(error => {
-          this.$message({
+          this.$openMessage({
             message: error,
             type: "warning"
           });
@@ -204,8 +203,6 @@ export default {
     },
     //执行编辑操作
     doEditKeywords() {
-      console.log(this.editForm);
-
       let userinfo = tools.storage.get("userinfo");
 
       let sign = tools.sign({
@@ -228,25 +225,25 @@ export default {
         })
         .then(response => {
           console.log(response);
-
           if (response.data.success) {
             this.eidtDialogVisible = false;
             //增加完成重新获取数据
             this.getKeywordsList();
           } else {
-            this.$message({
+            this.$openMessage({
               message: response.data.message,
               type: "warning"
             });
           }
         })
         .catch(error => {
-          this.$message({
+          this.$openMessage({
             message: error,
             type: "warning"
           });
         });
     },
+    // 删除关键词
     removeKeywords(id) {
       let userinfo = tools.storage.get("userinfo");
 
@@ -269,14 +266,14 @@ export default {
             //增加完成重新获取数据
             this.getKeywordsList();
           } else {
-            this.$message({
+            this.$openMessage({
               message: response.data.message,
               type: "warning"
             });
           }
         })
         .catch(error => {
-          this.$message({
+          this.$openMessage({
             message: error,
             type: "warning"
           });

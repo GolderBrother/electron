@@ -56,7 +56,7 @@
 
 <script>
 import tools from "../model/tools.js";
-
+import * as StringUtils from "../utils/stringUtils";
 export default {
   name: "report",
   data() {
@@ -75,15 +75,15 @@ export default {
 
       let y = date.getFullYear();
       let MM = date.getMonth() + 1;
-      MM = MM < 10 ? "0" + MM : MM;
+      MM = StringUtils.addZero(MM);
       let d = date.getDate();
-      d = d < 10 ? "0" + d : d;
+      d = StringUtils.addZero(d);
       let h = date.getHours();
-      h = h < 10 ? "0" + h : h;
+      h = StringUtils.addZero(h);
       let m = date.getMinutes();
-      m = m < 10 ? "0" + m : m;
+      m = StringUtils.addZero(m);
       let s = date.getSeconds();
-      s = s < 10 ? "0" + s : s;
+      s = StringUtils.addZero(s);
       return y + "-" + MM + "-" + d + " " + h + ":" + m + ":" + s;
     }
   },
@@ -156,7 +156,7 @@ export default {
           this.total = response.data.totalPage * 10;
         })
         .catch(error => {
-          this.$message({
+          this.$openMessage({
             message: error,
             type: "warning"
           });

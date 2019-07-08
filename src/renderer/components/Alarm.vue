@@ -44,7 +44,7 @@ export default {
           this.alarm = response.data.result;
         })
         .catch(error => {
-          this.$message({
+          this.$openMessage({
             message: error,
             type: "warning"
           });
@@ -71,19 +71,19 @@ export default {
           console.log(response);
 
           if (response.data.success) {
-            this.$message({
+            this.$openMessage({
               message: "设置成功",
               type: "success"
             });
           } else {
-            this.$message({
+            this.$openMessage({
               message: "设置失败",
               type: "success"
             });
           }
         })
         .catch(error => {
-          this.$message({
+          this.$openMessage({
             message: error,
             type: "warning"
           });
